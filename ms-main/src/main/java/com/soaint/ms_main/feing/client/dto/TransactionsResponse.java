@@ -1,4 +1,4 @@
-package com.soaint.ms_main.dto;
+package com.soaint.ms_main.feing.client.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

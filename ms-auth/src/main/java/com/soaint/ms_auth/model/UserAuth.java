@@ -18,6 +18,6 @@ public class UserAuth {
     @Column(name = "usuario", length = 20)
     private String username;
 
-    @Column(nullable = false,  length = 20)
+    @Column(nullable = false)
     private String password;
 }
