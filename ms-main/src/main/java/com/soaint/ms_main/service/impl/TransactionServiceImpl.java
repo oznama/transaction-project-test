@@ -34,7 +34,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<TransactionsResponse> getTransactions(int page, int size, String sort) {
+    public TransactionList getTransactions(int page, int size, String sort) {
         log.debug("Retrieving transactions for request: {}, {}, {} {}", page, size, sort);
         return transactionClient.getTransactions(page, size, sort);
     }

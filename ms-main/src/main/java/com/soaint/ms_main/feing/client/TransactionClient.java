@@ -1,9 +1,6 @@
 package com.soaint.ms_main.feing.client;
 
-import com.soaint.ms_main.dto.GenericResponse;
-import com.soaint.ms_main.dto.TransactionResponse;
-import com.soaint.ms_main.dto.TransactionUpdateStatusRequest;
-import com.soaint.ms_main.dto.TransactionsResponse;
+import com.soaint.ms_main.dto.*;
 import com.soaint.ms_main.feing.client.dto.TransactionClientRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +20,7 @@ public interface TransactionClient {
     GenericResponse updateTransactionStatus(TransactionUpdateStatusRequest updateStatusRequest);
 
     @GetMapping
-    List<TransactionsResponse> getTransactions(
+    TransactionList getTransactions(
             @RequestParam("page") int page,
             @RequestParam("size") int size,
             @RequestParam("sort") String sort

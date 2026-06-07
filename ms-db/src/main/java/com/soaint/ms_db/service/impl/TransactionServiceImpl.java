@@ -11,6 +11,7 @@ import com.soaint.ms_db.service.TransactionService;
 import com.soaint.ms_db.util.TransactionReferenceRandomizer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -50,9 +51,12 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<TransactionsResponse> getTransactions(Pageable pageable) {
+    public TransactionList getTransactions(Pageable pageable) {
         log.info("Getting transactions with page {}...", pageable);
-        return transactionRepository.findAll(pageable).map(transactionMapper::toTransactionsResponse).getContent();
+        Page<Transaction> transactions = transactionRepository.findAll(pageable);
+        log.debug("Transactions finds {}, isFirstPage: {}, isLastPage: {}", transactions.getTotalElements(), transactions.isFirst(), transactions.isLast());
+        return new TransactionList(transactions.isFirst(), transactions.isLast(),
+                transactions.map(transactionMapper::toTransactionsResponse).getContent());
     }
 
     /**

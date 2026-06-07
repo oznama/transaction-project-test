@@ -22,6 +22,7 @@ public class CustomExceptionGlobal {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<GenericResponse> handleMessageNotReadableException(HttpMessageNotReadableException e) {
         log.error("Catching message not readable exception");
+        e.printStackTrace();
         return ResponseEntity.badRequest().body(new GenericResponse(HttpStatus.BAD_REQUEST.value(), "Peticion invalida", null));
     }
 
