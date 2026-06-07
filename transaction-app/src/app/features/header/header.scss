@@ -1,0 +1,26 @@
+.header {
+    background-color: cornflowerblue;
+    display: flex;
+    justify-content: space-between;
+    min-width: 100vh;
+    padding: 12px 24px;
+    font-family: Arial, Helvetica, sans-serif;
+
+    h4 {
+        color: white;
+        margin: 0px;
+    }
+
+    button {
+        cursor: pointer;
+        background-color: white;
+        font-size: 14px;
+        color: cornflowerblue;
+        border: 0px;
+
+        &:hover {
+            background-color: blue;
+            color:white;
+        }
+    }
+}

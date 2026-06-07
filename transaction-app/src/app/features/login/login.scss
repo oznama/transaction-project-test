@@ -1,0 +1,63 @@
+$border-color: gray;
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: $border-color;
+
+    &-div {
+        &-main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            place-content: center;
+            border: 1px solid $border-color;
+            border-radius: 4px;
+            padding: 5px;
+
+            h3 {
+                font-size: 24px;
+            }
+
+            form {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+
+                .form-group {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+
+                    input {
+                        border: 1px solid $border-color;
+                    }
+                }
+
+                button {
+                    background-color: white;
+                    color: $border-color;
+                    border: 1px solid $border-color;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    padding: 4px;
+
+                    &:hover {
+                        background-color: $border-color;
+                        color: white;
+                    }
+
+                }
+            }
+
+            .error-message {
+                text-align: center;
+                color: red;
+            }
+        }
+    }
+}

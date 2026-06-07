@@ -1,0 +1,32 @@
+<div class="login">
+    <div class="login-div-main">
+        <h3>Iniciar Sesi&oacute;n</h3>
+        
+        <form (submit)="onSubmit($event)">
+            <div class="form-group">
+                <label>Usuario</label>
+                <input
+                    id="usuario"
+                    [formField]="loginForm.usuario"
+                    placeholder="Ingresa tu usuario"
+                />
+            </div>
+            <div class="form-group">
+                <label>Contrase&ntilde;a</label>
+                <input
+                    id="password"
+                    [formField]="loginForm.password"
+                    type="password"
+                />
+            </div>
+
+            @if (errorMessage()) {
+                <span class="error-message">{{ errorMessage() }}</span>
+            }
+
+            <button type="submit" [disabled]="isLoading()">
+                @if (isLoading()) { Cargando... } @else { Iniciar Sesión }
+            </button>
+        </form>
+    </div>
+</div>
