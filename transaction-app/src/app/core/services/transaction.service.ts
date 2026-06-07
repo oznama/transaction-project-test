@@ -3,12 +3,13 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { TransactionList, TransactionRequest, TransactionResponse, TransactionUpdateStatusRequest } from "../models/transaction.model";
 import { GenericResponse } from "../models/generic.model";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class TransactionService {
-    private api = 'http://localhost:8081/ms-main/api/v1/transactions';
+    private api = environment.apiMainUrl;
 
     constructor(private http: HttpClient) {}
 

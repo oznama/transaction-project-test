@@ -2,12 +2,13 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, tap } from "rxjs";
 import { AuthRequest, AuthResponse } from "../models/auth.model";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    private api = 'http://localhost:8080/ms-auth/api/v1/auth';
+    private api = environment.apiAuthUrl;
 
     constructor(private http: HttpClient) {}
 
