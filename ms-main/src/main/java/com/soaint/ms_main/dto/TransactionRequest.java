@@ -25,7 +25,6 @@ public record TransactionRequest(
         String cliente,
         @NotBlank(message = "Requerido")
         @Pattern(regexp = Regex.PATTERN_SECRET, message = "Secreto invalido, solo caracteres alfanumericos")
-        @Size(max = 20, message = "Secreto maximo de {max}")
         String secreto
 ) {
 }

@@ -5,6 +5,7 @@ import { TransactionRequest, TransactionsResponse, TransactionUpdateStatusReques
 import { form, FormField, required } from '@angular/forms/signals';
 import { ErrorDetail } from '../../core/models/generic.model';
 import { AlertService } from '../../core/services/alert.service';
+import { EncryptionService } from '../../core/services/encryption.service';
 
 @Component({
   selector: 'app-transaction',
@@ -15,6 +16,8 @@ import { AlertService } from '../../core/services/alert.service';
 export class Transaction {
   private transactionService = inject(TransactionService);
   private alertService = inject(AlertService);
+
+  constructor(private encryptionService: EncryptionService) {}
 
   transactions = signal<TransactionsResponse[]>([]);
   isLoading = signal<boolean>(false);
@@ -70,7 +73,6 @@ export class Transaction {
         this.isLoading.set(false);
       },
       error: err => {
-        console.log('Error', err)
         this.isLoading.set(false);
       }
     })
@@ -87,7 +89,6 @@ export class Transaction {
         this.loadTransactions();
       },
       error: err => {
-        console.log(err);
       }
     })
   }
@@ -110,8 +111,11 @@ export class Transaction {
     this.errorResponse.set([]);
     
     const formData = this.tranxModel();
+
+    const secretCipher = this.encryptionService.encrypt(formData.secreto);
+    console.debug('SecretCipher', secretCipher);
     
-    this.transactionService.create(formData).subscribe({
+    this.transactionService.create({ ...formData, secreto: secretCipher }).subscribe({
       next: (data) => {
         this.alertService.showAlert(`¡Operacion registrada correctamente con id ${data.id}!`, 'success');
         this.loadTransactions();
