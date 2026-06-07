@@ -3,15 +3,17 @@
     <div class="container-table">
         <table border="1" cellpadding="8">
         <thead>
-          <tr>
-            <th class="sorter" (click)="setSort('id')">ID</th>
-            <th class="sorter" (click)="setSort('operation')">Operaci&oacute;n</th>
-            <th class="sorter" (click)="setSort('amount')">Importe</th>
-            <th class="sorter" (click)="setSort('customer')">Cliente</th>
-            <th class="sorter" (click)="setSort('reference')">Referencia</th>
-            <th class="sorter" (click)="setSort('status')">Estatus</th>
-            <th></th>
-          </tr>
+          @if ( transactions().length > 0 ) {
+            <tr>
+              <th class="sorter" (click)="setSort('id')">ID</th>
+              <th class="sorter" (click)="setSort('operation')">Operaci&oacute;n</th>
+              <th class="sorter" (click)="setSort('amount')">Importe</th>
+              <th class="sorter" (click)="setSort('customer')">Cliente</th>
+              <th class="sorter" (click)="setSort('reference')">Referencia</th>
+              <th class="sorter" (click)="setSort('status')">Estatus</th>
+              <th></th>
+            </tr>
+          }
         </thead>
         <tbody>
           @for (tranx of transactions(); track tranx.id) {
@@ -29,19 +31,21 @@
               </td>
             </tr>
           } @empty {
-            <tr><td colspan="4" style="text-align: center;">No hay transacciones disponibles.</td></tr>
+            <tr><td colspan="7" style="text-align: center;">No hay transacciones disponibles.</td></tr>
           }
         </tbody>
       </table>
 
-      <div class="paginador">
-        <button [class]="getButtonDisabled(isFirstPage())" [disabled]="isFirstPage()" (click)="pagPrev()">&#60;&#60; Anterior</button>
-        <div class="pagina">
-          <label>Num por pagina</label>
-          <input class="input" type="text" (blur)="setSize($event)" placeholder="5" />
+      @if ( transactions().length > 0 ) {
+        <div class="paginador">
+          <button [class]="getButtonDisabled(isFirstPage())" [disabled]="isFirstPage()" (click)="pagPrev()">&#60;&#60; Anterior</button>
+          <div class="pagina">
+            <label>Num por pagina</label>
+            <input class="input" type="text" (blur)="setSize($event)" placeholder="5" />
+          </div>
+          <button [class]="getButtonDisabled(isLastPage())" [disabled]="isLastPage()" (click)="pagNext()">Siguiente &#x3E;&#x3E;</button>
         </div>
-        <button [class]="getButtonDisabled(isLastPage())" [disabled]="isLastPage()" (click)="pagNext()">Siguiente &#x3E;&#x3E;</button>
-      </div>
+      }
 
     </div>
     <div class="container-form">
