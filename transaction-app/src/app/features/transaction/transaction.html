@@ -1,6 +1,66 @@
 <app-header></app-header>
-<div class="container">
-    <div class="container-table">
+<div class="transaction">
+    <div class="transaction-form">
+
+      <h3>Registrar operaci&oacute;n</h3>
+      
+      <form (submit)="saveTransaction($event)">
+        <div class="form-group">
+          <label>Operaci&oacute;n</label>
+          <input
+            id="operacion"
+            [formField]="tranxForm.operacion"
+          />
+        </div>
+        <div class="form-group">
+          <label>Importe</label>
+          <input
+            id="importe"
+            [formField]="tranxForm.importe"
+          />
+        </div>
+        <div class="form-group">
+          <label>Cliente</label>
+          <input
+            id="cliente"
+            [formField]="tranxForm.cliente"
+          />
+        </div>
+        <div class="form-group">
+          <label>Secreto</label>
+          <input
+            id="secreto"
+            [formField]="tranxForm.secreto"
+          />
+        </div>
+
+        @if (errorResponse().length > 0) {
+          <ul>
+            @for ( error of errorResponse(); track error.property ) {
+              <li>
+                <span>{{ error.message }}</span>
+              </li>
+            }
+          </ul>
+        }
+
+        <button type="submit">Guardar</button>
+      </form>
+    </div>
+
+    <div class="transaction-table">
+
+      @if ( transactions().length > 0 ) {
+        <div class="paginador">
+          <button [class]="getButtonDisabled(isFirstPage())" [disabled]="isFirstPage()" (click)="pagPrev()">&#60;&#60; Anterior</button>
+          <div class="pagina">
+            <label>Num por pagina</label>
+            <input class="input" type="text" (blur)="setSize($event)" placeholder="5" />
+          </div>
+          <button [class]="getButtonDisabled(isLastPage())" [disabled]="isLastPage()" (click)="pagNext()">Siguiente &#x3E;&#x3E;</button>
+        </div>
+      }
+
         <table border="1" cellpadding="8">
         <thead>
           @if ( transactions().length > 0 ) {
@@ -35,64 +95,5 @@
           }
         </tbody>
       </table>
-
-      @if ( transactions().length > 0 ) {
-        <div class="paginador">
-          <button [class]="getButtonDisabled(isFirstPage())" [disabled]="isFirstPage()" (click)="pagPrev()">&#60;&#60; Anterior</button>
-          <div class="pagina">
-            <label>Num por pagina</label>
-            <input class="input" type="text" (blur)="setSize($event)" placeholder="5" />
-          </div>
-          <button [class]="getButtonDisabled(isLastPage())" [disabled]="isLastPage()" (click)="pagNext()">Siguiente &#x3E;&#x3E;</button>
-        </div>
-      }
-
-    </div>
-    <div class="container-form">
-
-      <h3>Registrar transacci&oacute;n</h3>
-      
-      <form (submit)="saveTransaction($event)">
-        <div class="form-group">
-          <label>Operaci&oacute;n</label>
-          <input
-            id="operacion"
-            [formField]="tranxForm.operacion"
-          />
-        </div>
-        <div class="form-group">
-          <label>Importe</label>
-          <input
-            id="importe"
-            [formField]="tranxForm.importe"
-          />
-        </div>
-        <div class="form-group">
-          <label>Cliente</label>
-          <input
-            id="cliente"
-            [formField]="tranxForm.cliente"
-          />
-        </div>
-        <div class="form-group">
-          <label>Secreto</label>
-          <input
-            id="secreto"
-            [formField]="tranxForm.secreto"
-          />
-        </div>
-
-        @if (errorResponse()) {
-          <ul>
-            @for ( error of errorResponse(); track error.property ) {
-              <li>
-                <span>{{ error.message }}</span>
-              </li>
-            }
-          </ul>
-        }
-
-        <button type="submit">Guardar</button>
-      </form>
     </div>
 </div>
