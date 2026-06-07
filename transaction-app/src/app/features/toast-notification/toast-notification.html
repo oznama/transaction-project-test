@@ -1,0 +1,8 @@
+<div class="alert-container">
+    @for (alert of alertService.alerts(); track alert.id) {
+        <div [class]="`alert alert-${alert.type}`">
+            <span>{{ alert.message }}</span>
+            <button (click)="alertService.dismissAlert(alert.id)" class="alert-close">&times;</button>
+        </div>
+    }
+</div>

@@ -1,0 +1,39 @@
+.alert {
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    min-width: 250px;
+    color: white;
+
+    &-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+    }
+
+    &-success {
+        background-color: green;
+    }
+    
+    &-danger {
+        background-color: red;
+    }
+    &-info {
+        background-color: blue;
+    }
+    
+    &-warning {
+        background-color: #f1c40f;
+    }
+
+    &-close {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+    }
+}

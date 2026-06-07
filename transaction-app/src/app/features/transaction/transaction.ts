@@ -4,6 +4,7 @@ import { TransactionService } from '../../core/services/transaction.service';
 import { TransactionRequest, TransactionsResponse, TransactionUpdateStatusRequest } from '../../core/models/transaction.model';
 import { form, FormField, required } from '@angular/forms/signals';
 import { ErrorDetail } from '../../core/models/generic.model';
+import { AlertService } from '../../core/services/alert.service';
 
 @Component({
   selector: 'app-transaction',
@@ -13,6 +14,7 @@ import { ErrorDetail } from '../../core/models/generic.model';
 })
 export class Transaction {
   private transactionService = inject(TransactionService);
+  private alertService = inject(AlertService);
 
   transactions = signal<TransactionsResponse[]>([]);
   isLoading = signal<boolean>(false);
@@ -62,7 +64,6 @@ export class Transaction {
     this.isLoading.set(true);
     this.transactionService.getAll(this.page(), this.size(), this.sort()).subscribe({
       next: (data) => {
-        console.log('Data', data);
         this.isFirstPage.set(data.isFirstPage);
         this.isLastPage.set(data.isLastPage);
         this.transactions.set(data.transactions);
@@ -112,6 +113,7 @@ export class Transaction {
     
     this.transactionService.create(formData).subscribe({
       next: (data) => {
+        this.alertService.showAlert(`¡Operacion registrada correctamente con id ${data.id}!`, 'success');
         this.loadTransactions();
         this.isLoading.set(false);
         this.tranxModel.set({ ...this.initialForm });
